@@ -35,8 +35,16 @@ public class InvoiceManagerTest {
 
   @Test
   void deberiaActualizarEstado() {
-    // Arrange (Preparar)
+    // Arrange (Preparar) .. Crear una factura primero, para luego actualizar su estado
+    Invoice invoice = manager.createInvoice("CloudTech", 1500.0);
 
+    // Act (Actuar) .. Actualizar el estado de la factura creada
+    boolean updated = manager.updateStatus(invoice.getId(), "PAGADA");
+
+    // Assert (Verificar 1) - Comprobamos los resultados
+    assertThat(updated).isTrue();
+    // Assert (Verificar 2) - El estado de la factura debe ser "PAGADA"
+    assertThat(invoice.getStatus()).isEqualTo("PAGADA");
   }
 
   @Test
