@@ -49,7 +49,18 @@ public class InvoiceManagerTest {
 
   @Test
   void deberiaEliminarFactura() {
-    // Arrange (Preparar)
+    // Arrange (Preparar) .. Crear una factura primero, para luego actualizar su estado
+    Invoice invoice = manager.createInvoice("CloudTech", 1500.0);
+
+    // Act (Actuar) .. Eliminar la factura creada
+    boolean removed = manager.deleteInvoice(invoice.getId());
+
+    // Assert (Verificar) - Comprobamos los resultados
+
+    // Verficación 1: La eliminación debe ser exitosa
+    assertThat(removed).isTrue();
+    // Verificación 2: La lista de facturas debe estar vacía
+    assertThat(manager.getAll()).isEmpty();
 
   }
 }
